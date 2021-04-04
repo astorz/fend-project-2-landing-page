@@ -27,6 +27,7 @@
  * 
 */
 
+// The following function checks whether an element is in the center of the viewport:
 elemInCenter = (el) => {
     const rect = el.getBoundingClientRect();
     const viewport = window.innerHeight;
@@ -39,7 +40,7 @@ elemInCenter = (el) => {
  * 
 */
 
-// build the nav
+// This function dynamically creates the naviation based on the html sections
 createNav = () => {
     let first = true;
     const sections = document.querySelectorAll('section');
@@ -66,7 +67,7 @@ setActiveClass = () => {
             if(elemInCenter(s)){
                 activeClassEl.classList.toggle('your-active-class');
                 s.classList.toggle('your-active-class');
-                // Switching active class in nav: 
+                // Switching active class in nav on scroll: 
                 document.querySelector(`a[href='#${s.getAttribute('id')}']`).classList.toggle('menu__active');
                 document.querySelector(`a[href='#${activeClassEl.getAttribute('id')}']`).classList.toggle('menu__active');
                 return;
@@ -99,14 +100,10 @@ document.querySelector('#navbar__list').addEventListener('click', scrollOnClick)
 
 
 // Set sections as active
-
+document.addEventListener('scroll', setActiveClass);
 // Used source below for further details during development:
 // https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
 
-document.addEventListener('scroll', setActiveClass);
 
-
-
-
-// Discovered property below via:
+// Note to self - saving below link for further development:
 // https://stackoverflow.com/questions/4096863/how-to-get-and-set-the-current-web-page-scroll-position

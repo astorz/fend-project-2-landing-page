@@ -41,13 +41,18 @@ elemInCenter = (el) => {
 
 // build the nav
 createNav = () => {
+    let first = true;
     const sections = document.querySelectorAll('section');
     for (s of sections) {
         const sectionId = s.getAttribute('id');
         const sectionName = s.getAttribute('data-nav');
         const newSection = document.createElement('li');
-        newSection.innerHTML = `<a href=#${sectionId}>${sectionName}</a>`;
-        newSection.setAttribute('class', 'menu__link');
+        if (first) {
+            newSection.innerHTML = `<a href=#${sectionId} class="menu__link menu__active" >${sectionName}</a>`;
+            first = false;
+        } else {
+            newSection.innerHTML = `<a href=#${sectionId} class="menu__link" >${sectionName}</a>`;
+        };
         document.querySelector('#navbar__list').appendChild(newSection);
     }
 };
@@ -61,6 +66,9 @@ setActiveClass = () => {
             if(elemInCenter(s)){
                 activeClassEl.classList.toggle('your-active-class');
                 s.classList.toggle('your-active-class');
+                // Switching active class in nav: 
+                document.querySelector(`a[href='#${s.getAttribute('id')}']`).classList.toggle('menu__active');
+                document.querySelector(`a[href='#${activeClassEl.getAttribute('id')}']`).classList.toggle('menu__active');
                 return;
             }
         };
